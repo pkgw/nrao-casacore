@@ -1,0 +1,6 @@
+/build
+/.cproject
+/.project
+/.sconf_temp
+/.sconsign.dblite
+/.settings
