@@ -1920,8 +1920,8 @@ Array<Float> MSSelector::getWeight(const ROArrayColumn<Float>& wtCol,
 		Bool sigma) const
 {
 	Array<Float> wt;
-	if (wantedOne_p>=0) {
-		wt = wtCol.getColumn(Slicer(Slice(wantedOne_p,1)));
+	if (useSlicer_p) {
+		wt = wtCol.getColumn(Slicer(polSlice_p));
 	} else {
 		wt = wtCol.getColumn();
 	}
@@ -1930,7 +1930,24 @@ Array<Float> MSSelector::getWeight(const ROArrayColumn<Float>& wtCol,
 		Matrix<Float> outwt;
 		stokesConverter_p.convert(outwt,wt,sigma);
 		wt.reference(outwt);
+	} else if (polIndex_p.nelements () > 0) {
+	    Int n = polIndex_p.nelements ();
+	    Int nRow = wt.shape ()(1);
+	    Array<Float> out (IPosition (2, n, nRow));
+	    IPosition sp (2, 0, 0);
+	    IPosition ep (2, 0, nRow - 1);
+	    IPosition swt (2, 0, 0);
+	    IPosition ewt (2, 0, nRow - 1);
+
+	    for (Int i = 0; i < n; i++) {
+		sp(0) = ep(0) = i;
+		swt(0) = ewt(0) = polIndex_p(i);
+		out(sp,ep) = wt(swt,ewt);
+	    }
+
+	    wt.reference (out);
 	}
+
 	return wt;
 }
 
