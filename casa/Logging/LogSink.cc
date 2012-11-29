@@ -35,6 +35,7 @@
 #include <casacore/casa/Logging/StreamLogSink.h>
 
 #include <casacore/casa/Utilities/Assert.h>
+#include <casacore/casa/System/AipsrcValue.h>
 
 #include <casacore/casa/iostream.h>
 
@@ -320,8 +321,11 @@ void LogSink::createGlobalSink()
 {
     ScopedMutexLock lock(theirMutex);
     if ( ! LogSink::global_sink_p ) {
+	int priority;
+	AipsrcValue<int>::find (priority, "logging.defaultpriority",
+				(int) LogMessage::NORMAL);
         LogSink::global_sink_p = new CountedPtr<LsiIntermediate> ();
-        (* global_sink_p) = new LsiIntermediate (new StreamLogSink(LogMessage::NORMAL, &cerr));
+        (* global_sink_p) = new LsiIntermediate (new StreamLogSink((LogMessage::Priority) priority, &cerr));
     }
 }
 
