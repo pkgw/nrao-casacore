@@ -307,7 +307,6 @@ private:
   mutable Slicer slicer_p;
   Slice chanSlice_p,polSlice_p;
   Vector<Int> polIndex_p;
-  Int wantedOne_p;
   Bool convert_p, subSet_p;
   StokesConverter stokesConverter_p;
   Vector<String> polSelection_p;

@@ -59,7 +59,7 @@ namespace casacore { //# NAMESPACE CASACORE - BEGIN
 
 MSSelector::MSSelector():msIter_p(0),initSel_p(False),dataDescId_p(0),
 		lastDataDescId_p(1,-1),useSlicer_p(False),
-		haveSlicer_p(False),wantedOne_p(-1),convert_p(False),
+		haveSlicer_p(False),convert_p(False),
 		useIfrDefault_p(True)
 { }
 
@@ -70,7 +70,7 @@ MSSelector::MSSelector(MeasurementSet& ms):ms_p(ms),
 		lastDataDescId_p(1,-1),
 		useSlicer_p(False),
 		haveSlicer_p(False),
-		wantedOne_p(-1),convert_p(False),
+		convert_p(False),
 		useIfrDefault_p(True)
 { }
 
@@ -92,7 +92,6 @@ MSSelector& MSSelector::operator=(const MSSelector& other)
 	useSlicer_p=other.useSlicer_p;
 	haveSlicer_p=other.haveSlicer_p;
 	slicer_p=other.slicer_p;
-	wantedOne_p=other.wantedOne_p;
 	convert_p=other.convert_p;
 	useIfrDefault_p=other.useIfrDefault_p;
 	return *this;
@@ -115,7 +114,6 @@ void MSSelector::setMS(MeasurementSet& ms)
 	dataDescId_p=-1;
 	useSlicer_p=False;
 	haveSlicer_p=False;
-	wantedOne_p=-1;
 	convert_p=False;
 	useIfrDefault_p=True;
 }
@@ -134,7 +132,6 @@ Bool MSSelector::initSelection(const Vector<Int>& dataDescId, Bool reset)
 		polSlice_p=Slice();
 		chanSlice_p=Slice();
 		haveSlicer_p=False;
-		wantedOne_p=-1;
 		convert_p=False;
 		useIfrDefault_p=True;
 		return True;
