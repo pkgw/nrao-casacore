@@ -35,6 +35,7 @@
 #include <vector>
 #include <cstddef>                  // for ptrdiff_t
 #include <sys/types.h>
+#include <cstdlib>
 
 namespace casacore { //# NAMESPACE CASACORE - BEGIN
 

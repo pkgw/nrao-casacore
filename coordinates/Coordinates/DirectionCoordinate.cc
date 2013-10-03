@@ -56,6 +56,7 @@
 #include <casacore/casa/iomanip.h>  
 #include <casacore/casa/sstream.h>
 
+#include <memory>
 
 namespace casacore { //# NAMESPACE CASACORE - BEGIN
 

@@ -38,6 +38,9 @@
 #include <casacore/tables/TaQL/TableParse.h>
 #include <casacore/tables/Tables/TableProxy.h>
 
+#include <iomanip>
+#include <memory>
+
 #define _ORIGIN "MSMetaData::" + String(__FUNCTION__) + ": "
 
 namespace casacore {
